@@ -24,7 +24,7 @@ pipeline {
 
         failure {
 
-            emailext attachLog: true, subject: "success hello world", body: "success hello world", to: "sunil.ssb@gmail.com"
+            emailext attachLog: true, subject: "failure hello world", body: "failure hello world", to: "sunil.ssb@gmail.com"
 
             }
 
