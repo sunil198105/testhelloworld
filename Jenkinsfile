@@ -4,6 +4,9 @@ pipeline {
     triggers {
         pollSCM '* * * * *'
     }
+    environment {
+                    EMAIL_TO = 'sunil.ssb@gmail.com'
+                }
     stages {
         stage('Build') {
             steps {
@@ -22,6 +25,7 @@ pipeline {
         failure {
 
             emailext body: 'build failed',
+
                 to: "${EMAIL_TO}",
                 subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
             }
