@@ -24,7 +24,7 @@ pipeline {
 
         failure {
 
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+            emailext attachLog: true, subject: "success hello world", body: "success hello world", to: "sunil.ssb@gmail.com"
 
             }
 
