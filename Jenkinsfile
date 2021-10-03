@@ -32,4 +32,5 @@ pipeline {
                 to: "${EMAIL_TO}",
                 subject: 'Build sucessful in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
         }
+    }
 }
