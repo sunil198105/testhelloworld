@@ -24,17 +24,16 @@ pipeline {
 
         failure {
 
-            emailext body: 'build failed',
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
 
-                to: "${EMAIL_TO}",
-                subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
             }
 
         success {
 
-            emailext body: 'build sucessful',
-                to: "${EMAIL_TO}",
-                subject: 'Build sucessful in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            emailext  subject: "success hello world", body: "success hello world", to: "sunil.ssb@gmail.com"
+
+
+
         }
     }
 }
