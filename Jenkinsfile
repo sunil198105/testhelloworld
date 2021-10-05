@@ -4,9 +4,6 @@ pipeline {
     triggers {
         pollSCM '* * * * *'
     }
-    environment {
-                    EMAIL_TO = 'sunil.ssb@gmail.com'
-                }
     stages {
         stage('Build') {
             steps {

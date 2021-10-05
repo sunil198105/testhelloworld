@@ -1,0 +1,36 @@
+---
+  - name: Test
+    hosts: localhost
+
+
+    tasks:
+      - name: list images
+        ec2_ami_facts:
+          region: ap-southeast-2
+          owners: 121342174818
+
+        register: fact_ami_info
+
+      - name: tag images
+        amazon.aws.ec2_ami:
+          region: ap-southeast-2
+          image_id: "{{ item.image_id }}"
+          tags:
+            IS_EOL: YES
+        with_items: "{{ fact_ami_info.images}}"
+        when:
+          - item.tags['old'] == 'True'
+
+      - name: launch ec2
+        amazon.aws.ec2:
+          region: ap-southeast-2
+          image: "{{ item.image_id }}"
+          wait: yes
+          count: 1
+          key_name: "ec2key"
+          instance_type: t2.micro
+          instance_tags:
+            IS_EOL: NO
+        with_items: "{{ fact_ami_info.images}}"
+        when:
+          - item.tags['old'] != 'True'
